@@ -10,14 +10,21 @@
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
     "test:chrome": "playwright test --project=chromium",
-    "test:report": "playwright test && playwright show-report"
+    "test:report": "playwright test && playwright show-report",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.29.2",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.2.2"
+    "@types/node": "^25.2.2",
+    "eslint": "^10.0.0",
+    "eslint-plugin-playwright": "^2.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0"
   }
 }

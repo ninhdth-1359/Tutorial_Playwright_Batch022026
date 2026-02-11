@@ -18,7 +18,6 @@ test('user can register an account successfully when filling the registration fo
 
   await page.locator('#dob').fill('1990-12-10');
 
-
   // ===== EXPECTS INPUT=====
   await expect(page.getByLabel('Username:')).toHaveValue('Hai Ninh');
   await expect(page.getByLabel('Email:')).toHaveValue('dao.thi.hai.ninh@gmail.com');
