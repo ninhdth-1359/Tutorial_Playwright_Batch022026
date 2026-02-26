@@ -34,19 +34,53 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project để chạy .setup.ts files
     {
-      name: 'chromium',
+      name: 'setup',
+      testMatch: /.*\.setup\.ts$/, // ✅ Nhận diện .setup.ts files
       use: { ...devices['Desktop Chrome'] },
     },
-
+    // 2. Chrome đã login
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /.*\.auth\.spec\.ts$/,
     },
 
+    // 3. Firefox đã login
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /.*\.auth\.spec\.ts$/,
+    },
+
+    // 4. Safari đã login
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testIgnore: /.*\.auth\.spec\.ts$/,
+    },
+
+    // 5. Chrome chưa login (test login)
+    {
+      name: 'chromium-no-auth',
+      testMatch: /.*\.auth\.spec\.ts$/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: undefined,
+      },
     },
 
     /* Test against mobile viewports. */
