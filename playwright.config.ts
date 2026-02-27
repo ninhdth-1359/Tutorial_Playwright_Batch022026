@@ -34,19 +34,37 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    //Setup project de chay setup login truoc khi chay test
+    {
+      name: 'setup-login',
+      testMatch: /.*\.setup\.ts$/, // ✅ Nhận diện các file có đuôi .setup.ts
+      use: { ...devices['Desktop Chrome'] },
+    },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup-login'], // Đảm bảo setup-login chạy trước khi chromium
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/user.json', // Sử dụng trạng thái đã lưu từ setup-login
+      },
+      dependencies: ['setup-login'], // Đảm bảo setup-login chạy trước khi firefox
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'playwright/.auth/user.json', // Sử dụng trạng thái đã lưu từ setup-login
+      },
+      dependencies: ['setup-login'], // Đảm bảo setup-login chạy trước khi webkit
     },
 
     /* Test against mobile viewports. */
