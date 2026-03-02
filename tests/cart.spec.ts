@@ -18,7 +18,7 @@ test.describe('Cart Functionality', () => {
     await inventoryPage.shoppingCartLink.click();
     const cartPage = new CartPage(inventoryPage.page);
     await expect(cartPage.cartItems.first().locator('.inventory_item_name')).toHaveText(
-      'Sauce Labs Backpack',
+      'Sauce Labs Backpackvvvv',
     );
   });
 });

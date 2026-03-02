@@ -10,3 +10,4 @@ screenshots/
 
 # Do dung pnpm nên sẽ ignore file lock của npm
 package-lock.json
+report.json
